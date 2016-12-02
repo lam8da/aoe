@@ -17,6 +17,11 @@
 #include "menu.h"
 #include "todo.h"
 
+#ifdef __MACH__
+#include <mach/clock.h>
+#include <mach/mach.h>
+#endif
+
 #define get_os_version(a) a=0x1000
 
 struct game *game_ref = NULL;
@@ -1410,7 +1415,17 @@ static signed game_show_focus_screen(struct game *this)
 	struct timespec tp;
 	unsigned gamespeed;
 	stub
-	clock_gettime(CLOCK_REALTIME, &tp);
+#ifdef __MACH__ // OS X does not have clock_gettime, use clock_get_time
+    clock_serv_t cclock;
+  mach_timespec_t mts;
+  host_get_clock_service(mach_host_self(), CALENDAR_CLOCK, &cclock);
+  clock_get_time(cclock, &mts);
+  mach_port_deallocate(mach_task_self(), cclock);
+  tp.tv_sec = mts.tv_sec;
+  tp.tv_nsec = mts.tv_nsec;
+#else
+  clock_gettime(CLOCK_REALTIME, &tp);
+#endif
 	prng_init(tp.tv_nsec / 1000LU);
 	unsigned w = reg_cfg.screen_size;
 	unsigned sw = 640, sh = 480;

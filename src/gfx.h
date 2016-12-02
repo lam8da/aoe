@@ -5,7 +5,12 @@
 #include "view.h"
 #include <stdint.h>
 #include <SDL2/SDL.h>
+
+#ifdef __APPLE__
+#include <OpenGL/gl.h>
+#else
 #include <GL/gl.h>
+#endif
 
 struct pal_entry {
 	uint8_t r, g, b, flags;

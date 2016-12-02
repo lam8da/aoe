@@ -2,7 +2,6 @@
 #include <string.h>
 #include <sys/types.h>
 #include <sys/stat.h>
-#include <GL/gl.h>
 #include <SDL2/SDL_image.h>
 #include "engine.h"
 #include "menu.h"

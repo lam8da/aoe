@@ -8,7 +8,6 @@
 #include <strings.h>
 #include <unistd.h>
 #include <SDL2/SDL.h>
-#include <GL/gl.h>
 #include "bkg.h"
 #include "dbg.h"
 #include "empx.h"
@@ -17,6 +16,12 @@
 #include "sfx.h"
 #include "xmap.h"
 #include "todo.h"
+
+#ifdef __APPLE__
+#include <OpenGL/gl.h>
+#else
+#include <GL/gl.h>
+#endif
 
 int fd_langx = -1, fd_lang = -1;
 char *data_langx = NULL, *data_lang = NULL;

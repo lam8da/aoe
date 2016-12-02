@@ -1,3 +1,15 @@
+ADDING MISSING DEPENDENCIES (FOR MAC)
+
+brew install sdl2
+brew install sdl2_image
+brew install sdl
+brew install sdl_image
+brew install sdl_ttf
+brew help tap
+brew tap homebrew/versions
+brew install glfw3
+brew install glew
+
 BUILDING THE GAME
 
 All code that actually mimicks Age of Empires Rise of Rome (AoE RoR) is
